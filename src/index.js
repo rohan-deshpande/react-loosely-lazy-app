@@ -3,8 +3,18 @@ import ReactDOM from 'react-dom';
 import { lazyForPaint, LazySuspense } from 'react-loosely-lazy';
 import { LazyComponent as LazyDependencyComponent } from 'react-loosely-lazy-component';
 
-const LazyAppComponent = lazyForPaint(() =>
-  import(/* webpackChunkName: "app-async" */ './async')
+const LazyAppComponent = lazyForPaint(
+  () => import(/* webpackChunkName: "app-async" */ './async'),
+  {
+    getCacheId: function () {
+      if (require && require.resolveWeak) {
+        return require.resolveWeak('./async');
+      }
+
+      return './async';
+    },
+    moduleId: './async'
+  }
 );
 const Loading = ({ componentName }) => <div>loading {componentName}...</div>;
 const App = () => (
