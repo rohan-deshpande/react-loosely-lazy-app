@@ -11,6 +11,7 @@ module.exports = {
     chunkFilename: '[name].js',
     publicPath: '/build/'
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -38,5 +39,9 @@ module.exports = {
     new ReactLooselyLazyPlugin({
       filename: 'rll-manifest.json'
     })
-  ]
+  ],
+  devServer: {
+    contentBase: path.resolve(__dirname, 'demo'),
+    publicPath: '/build/'
+  }
 };
