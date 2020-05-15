@@ -1,6 +1,6 @@
 {
   "name": "react-loosely-lazy-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple app designed to test out rll manifest creation in more complex scenarios with webpack",
   "main": "build/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-loosely-lazy": "^0.2.4",
-    "react-loosely-lazy-component": "github:rohan-deshpande/react-loosely-lazy-component#master"
+    "prop-types": "github:rohan-deshpande/prop-types#master"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",

@@ -11,6 +11,7 @@ module.exports = {
     chunkFilename: '[name].js',
     publicPath: '/build/'
   },
+  mode: 'development',
   devtool: 'source-map',
   module: {
     rules: [
@@ -24,6 +25,18 @@ module.exports = {
             presets: [
               ['@babel/preset-env', { modules: false }],
               '@babel/preset-react'
+            ],
+            plugins: [
+              ['@babel/plugin-proposal-class-properties'],
+              '@babel/plugin-proposal-export-namespace-from',
+              '@babel/plugin-syntax-dynamic-import',
+              '@babel/plugin-syntax-import-meta',
+              [
+                'react-loosely-lazy/babel-plugin',
+                {
+                  client: true
+                }
+              ]
             ]
           }
         }
