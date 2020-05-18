@@ -1,6 +1,21 @@
 const path = require('path');
 const { ReactLooselyLazyPlugin } = require('react-loosely-lazy/webpack-plugin');
-
+const babelPlugins = [
+  ['@babel/plugin-proposal-class-properties'],
+  '@babel/plugin-proposal-export-namespace-from',
+  '@babel/plugin-syntax-dynamic-import',
+  '@babel/plugin-syntax-import-meta',
+  [
+    'react-loosely-lazy/babel-plugin',
+    {
+      client: true
+    }
+  ]
+];
+const babelPresets = [
+  ['@babel/preset-env', { modules: false }],
+  '@babel/preset-react'
+];
 module.exports = {
   entry: {
     main: path.join(__dirname, 'src/index.js')
@@ -22,30 +37,25 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             babelrc: false,
-            presets: [
-              ['@babel/preset-env', { modules: false }],
-              '@babel/preset-react'
-            ],
-            plugins: [
-              ['@babel/plugin-proposal-class-properties'],
-              '@babel/plugin-proposal-export-namespace-from',
-              '@babel/plugin-syntax-dynamic-import',
-              '@babel/plugin-syntax-import-meta',
-              [
-                'react-loosely-lazy/babel-plugin',
-                {
-                  client: true
-                }
-              ]
-            ]
+            presets: babelPresets,
+            plugins: babelPlugins
           }
+        }
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'babel-loader',
+        options: {
+          plugins: babelPlugins,
+          presets: [...babelPresets, '@babel/preset-typescript']
         }
       }
     ]
   },
   resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.json'],
     alias: {
-      test: path.resolve(__dirname, 'webpack')
+      'react-loosely-lazy-app': path.resolve(__dirname, './src')
     }
   },
   plugins: [
